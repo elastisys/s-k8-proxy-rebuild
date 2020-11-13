@@ -4,15 +4,15 @@
 replicaCount: 1
 image:
   nginx:
-    repository: <docker registry>/reverse-proxy-nginx
+    repository: elastisys/reverse-proxy-nginx
     tag: 0.0.1
     pullPolicy: IfNotPresent
   squid:
-    repository: <docker registry>/reverse-proxy-squid
+    repository: elastisys/reverse-proxy-squid
     tag: 0.0.1
     pullPolicy: IfNotPresent
   icap:
-    repository: <docker registry>/reverse-proxy-c-icap
+    repository: elastisys/reverse-proxy-c-icap
     tag: 0.0.1
     pullPolicy: IfNotPresent
 podAnnotations: {}
@@ -20,15 +20,15 @@ application:
   nginx:
     secretName: reverse-proxy-nginx
     env:
-      ALLOWED_DOMAINS: gov.uk.glasswall-icap.com,www.gov.uk.glasswall-icap.com,assets.publishing.service.gov.uk.glasswall-icap.com
-      ROOT_DOMAIN: glasswall-icap.com
-      SUBFILTER_ENV: ".gov.uk,.gov.uk.glasswall-icap.com  .amazonaws.com,.amazonaws.com.glasswall-icap.com"
+      ALLOWED_DOMAINS: gov.uk.glasswall-ck8s-proxy.com,www.gov.uk.glasswall-ck8s-proxy.com,assets.publishing.service.gov.uk.glasswall-ck8s-proxy.com
+      ROOT_DOMAIN: glasswall-ck8s-proxy.com
+      SUBFILTER_ENV: ".gov.uk,.gov.uk.glasswall-ck8s-proxy.com  .amazonaws.com,.amazonaws.com.gov.uk.glasswall-ck8s-proxy.com"
     secrets: {}
   squid:
     secretName: reverse-proxy-squid
     env:
-      ALLOWED_DOMAINS: gov.uk.glasswall-icap.com,www.gov.uk.glasswall-icap.com,assets.publishing.service.gov.uk.glasswall-icap.com
-      ROOT_DOMAIN: glasswall-icap.com
+      ALLOWED_DOMAINS: gov.uk.glasswall-ck8s-proxy.com,www.gov.uk.glasswall-ck8s-proxy.com,assets.publishing.service.gov.uk.glasswall-ck8s-proxy.com
+      ROOT_DOMAIN: glasswall-ck8s-proxy.com
     secrets: {}
   icap:
     secretName: reverse-proxy-icap
@@ -42,12 +42,12 @@ service:
     name: nginx
     type: ClusterIP
     additionalHosts:
-    - www.gov.uk.glasswall-icap.com
-    - assets.publishing.service.gov.uk.glasswall-icap.com
+    - www.gov.uk.glasswall-ck8s-proxy.com
+    - assets.publishing.service.gov.uk.glasswall-ck8s-proxy.com
     commonName:
     externalPort: 443
     internalPort: 443
-    url: gov.uk.glasswall-icap.com
+    url: gov.uk.glasswall-ck8s-proxy.com
   squid:
     enabled: true
     annotations: {}
@@ -88,24 +88,24 @@ readinessProbe:
 resources:
   nginx:
     limits:
-      cpu: 250m
+      cpu: 50m
       memory: 250Mi
     requests:
-      cpu: 250m
+      cpu: 50m
       memory: 250Mi
   squid:
     limits:
-      cpu: 250m
+      cpu: 50m
       memory: 500Mi
     requests:
-      cpu: 250m
+      cpu: 50m
       memory: 500Mi
   icap:
     limits:
-      cpu: 500m
+      cpu: 50m
       memory: 500Mi
     requests:
-      cpu: 500m
+      cpu: 50m
       memory: 500Mi
 
 #
