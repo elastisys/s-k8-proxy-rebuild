@@ -89,24 +89,24 @@ readinessProbe:
 resources:
   nginx:
     limits:
-      cpu: 50m
+      cpu: 250m
       memory: 250Mi
     requests:
-      cpu: 50m
+      cpu: 250m
       memory: 250Mi
   squid:
     limits:
-      cpu: 50m
+      cpu: 250m
       memory: 500Mi
     requests:
-      cpu: 50m
+      cpu: 250m
       memory: 500Mi
   icap:
     limits:
-      cpu: 50m
+      cpu: 500m
       memory: 500Mi
     requests:
-      cpu: 50m
+      cpu: 500m
       memory: 500Mi
 
 #
