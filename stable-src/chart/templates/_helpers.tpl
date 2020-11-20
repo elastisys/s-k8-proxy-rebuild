@@ -31,8 +31,3 @@ Get a hostname from URL
 {{- define "hostname" -}}
 {{- . | trimPrefix "http://" |  trimPrefix "https://" | trimSuffix "/" | quote -}}
 {{- end -}}
-
-{{- define "icap_host" -}}
-{{- $name := default .Chart.Name .Values.nameOverride | replace "-" "_" -}}
-{{- printf "{%s_%s_%s}" .Release.Name $name "ICAP_SERVICE_HOST" | trimSuffix "-" | upper | replace "-" "_" -}}
-{{- end -}}

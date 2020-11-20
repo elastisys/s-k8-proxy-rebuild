@@ -40,7 +40,7 @@ spec:
           - name: SQUID_IP
             value: {{ template "fullname" $ }}-squid
           - name: ICAP_URL
-            value: icap://${{ template "icap_host" $ }}:1344/gw_rebuild
+            value: icap://{{ ((lookup "v1" "Service" "icap-adaptation" "icap-service").spec).clusterIP }}:1344/gw_rebuild
         {{- range $key, $val := . }}
           - name: "{{ tpl $key $  }}"
             value: "{{ tpl $val $  }}"
@@ -107,7 +107,7 @@ spec:
         {{- end }}
         env:
           - name: ICAP_URL
-            value: icap://${{ template "icap_host" $ }}:1344/gw_rebuild
+            value: icap://{{ ((lookup "v1" "Service" "icap-adaptation" "icap-service").spec).clusterIP }}:1344/gw_rebuild
         {{- with .Values.application.squid.env }}
         {{- range $key, $val := . }}
           - name: "{{ tpl $key $  }}"
